@@ -1,0 +1,793 @@
+=============================================================
+CS106B, Programming Abstractions in C++, Win 2018
+      Marty Stepp,     24.03.2023     
+=============================================================
+CS106AJ JavaScript 
+CS106A Java 
+CS106X C++ in depth
+
+qt creator setup 
+
+Lecture 01- Introduction to C++ ====================================
+c++: helloworld.cpp  > .o object files > executabel; compilation is platform specific( each version is optimized for that platform )
+Java: .class > .jar; compilation is not platform specific 
+
+main function  ==========
+main: verall starting point of program 
+  int main() {
+  }
+return: an integer ext code to the operating system. (return 0)
+
+Syntax =========
+int x = 42 + 7 * -5; // variables, types
+double pi = 3.14156  /* two comment styles */ 
+char c = 'Q' 
+bool b = true
+
+for (int i =0; i < 10; i++) {   //for loop 
+    if (i % 2 == 0) {           // conditional  
+    x += i;
+    }
+}
+
+Include =========
+#include <libname>  // a c++ sys lib
+#include "libname.h"  // a local project lib
+  e.g. 
+  #include <iostream>
+  #include "somelib.h"
+
+namespaces and using ========
+using namespace std;
+
+input / ouput =========
+cout << expression  << expression ... 
+  cout "You aer " << age << " years old!";
+
+endl: for end of line/ next line 
+cin >> variable // reading user input, discourage!!!
+simpio.h   // standford lib file includes better user input
+console.h  // popup output to console
+
+function ========
+//why function? 3 things computer science hates: redundency, inefficiency, redundency
+
+void songs(){
+    ...
+}
+int main(){
+    song();
+    return 0;
+}
+
+
+Lecture 02- Functions, Strings =============================================
+To use functions before MAINs, use function prototypes at beginning of file.
+  e.g. viod song(); // function prototypes
+
+math functions ========
+  #include <cmath>
+default parameters ======
+  void printline(int width = 10, char letter = '*') {
+  }
+value semantics / reference semantics =======
+int a    // when variables are passed as parameters, their values are copied, modifying a parameter will NOT affect variable passed in 
+int& a // link the functions to the same place in memory,  modifying a parameter will  affect variable passed in 
+
+void swap_ref(int &a, int&b) {
+       int temp = a; 
+       a = b;
+       b = temp;
+}
+void swap(int &a, int&b) {
+       int temp = a; 
+       a = b;
+       b = temp;
+}
+int main(){
+       x = 17;
+       y = 35;
+       swap_ref(x, y);
+       cout << x << "," << y << endl;  // 35,17       
+       swap(x, y);
+       cout << x << "," << y << endl;  // 17,35
+       return 0;
+}
+
+output parameters =========
+e.g. quadratic exercise 
+#include <cmath>
+void quadratic(int a, int b, int c, double& root1, double& root2){
+       double d =  sqrt(b*b - 4*a*c); 
+       root1 = (-b + d) / (2 * a); 
+       root2 = (-b - d) / (2 * a);     
+       }
+int main() {
+       double root1 root2
+       quadratic(1, -3, -4, root1, root2);
+       cout << "The roots are " << root 1 " and " << root2 << endl;   // 4,-1
+}
+
+procedural decomp. ============
+strings ===========
+basic:
+       string s = "Hi D001!"
+       char c1 = s[3]; // D
+concatinate: + or += 
+compare (ascii ordering): ==  !=  <  >=
+mutable: 
+       s.append(" Stepp");
+       s.erase(3,2);
+       s[6] = 'o'
+str methods ===========
+s.find(str)
+s.insert(str)
+s.replace(index, len, str)
+....
+
+str objects ======= 
+converstion functions =======
+exercise problem ========
+str input ========
+cin only takes single word
+exercise =======
+/* 
+M
+MA
+MAR
+MARTY 
+ ARTY
+  RTY
+   TY
+    y
+*/
+void nameDiamond(string s) {
+       // first half
+       for (int i=0; i<s.length();i++ {
+              cout << s.substr(0, i+1) << endl;
+       }
+       // second half
+       for (int i=0; i<s.length();i++ {
+              // 1) print ? spaces
+              for (j=0; j<i+1; j++) {
+                     cout << " ";
+              }
+              // 2) print substring of s 
+              cout << s.substr(i+1) << endl;
+       }
+}
+int main(){
+       nameDiamond("Marty");
+}
+
+
+Lecture 03- I_O Streams, Vector_Grid ============================================
+reading files ========
+ifstream / ofstream: open file > read each line > close file 
+operator =========
+>> string extraction operator 
+ifstream input; 
+input.open("bla.txt")
+string token 
+input >> token
+
+vector =========
+standard lib: STL vs SPL standford c++ library 
+vectors aka lists:
+
+# include "vector.h"
+
+arrarys in c++ are bad, avoid it
+
+members: .add(value)  .clear()  .size()
+
+for (string name : names) {
+       cout << name << endl 
+} // iterationg over array 
+
+v.insert(2, 42);
+v.remove(1); 
+
+grid ===============
+Grid<type> name(r,c); 
+g[r][c]
+g.inBounds(r,c)
+
+Grid<int> matrix(3,4)
+Grind<int> matrix = {
+       { 1 22 3  21  11 }, 
+       {      },
+       {      },
+}
+
+Grid as parameter 
+copying is slow, should pass by reference with &
+int computeSum(Grid<int>& g )
+
+
+Lecture 04 Abstract data Types ADTs ==========================================
+nested vector: 
+linkedlist class: 
+
+
+Stacks ======= 
+LIFO / last-in first-out: 
+stack class: .pop()  .push(value) .peak()
+"undo"
+Stack<int> s; 
+s.push(42);
+
+s[i]  // do not compile, against nature of stack, instead, u pull elements out of stack one at at time (wile stack is not empty, do something with it)
+e.g.
+// process (and empty!) an entire stack
+while (!s.isEmpty()) {
+       do something with s.pop()
+}
+
+stack exercise: finding inbalance "(" or "{" =======
+
+Queues =======
+basics: FIFO; elements stored; no index; can add to end, remov/exam front
+#include "queue.h"
+q.dequeue()
+q.enqueue()
+q.isEmpty()
+q.peek()
+
+while(!q.isEmpty()){
+       do somethign with q.dequeue();  // process (and destroy) an entire queue 
+}
+
+queue exercise: change queue: a b c to a b c c b a =======
+
+
+Lecture 05 Sets, Maps ==============================================================
+set: no duplicates (e.g. search for membership) =======
+- adds / removes / (check) contains efficiently 
+- no index, no looping (need create your only for loop)
+
+implementation class: Set(sorted) vs Hashset(not-sorted) 
+
+members: .add(value)  .clear  .contains(value), ... 
+e.g. count words in bible.txt  using vector (20s) vs set (0.6s)
+
+set operators: == !=  +  *  - 
+
+maps (dictionary, associative array, hash maps in JS ) =========
+key:value pair, e.g. real-world examples 
+e.g. Map<string, int> wordCount; 
+
+operations: .put(key, value), .get(key),  .remove(key)
+implementation class: Map vs HashMap 
+
+members: m.get[key] = m[key], ...
+
+loop over map: 
+
+exercise: count accurrences of each unique word in a large file
+readfile > read words > if word already exist in map > value + 1 
+                      > if word not exist in map > add pair 
+                      
+nested things possible 
+
+big O ========
+O(n), O(1)
+
+
+Lecture 06 Recursion ==============================================================
+"self-similiar"? problem is similiar to a smaller version of itself. 
+"functional lanugages"
+recursion and cases: 
+     if: 
+       base case: simple occurrence 
+     else: 
+       recursive case: more complex, calls smaller version of itself 
+       
+spawns a new copy of the function and continue 
+
+exercise: multiple calls tracing / mystery 
+
+exercise: isPalindrome  e.g. ""racecar"  =====
+bool isPalindrome(string s)
+       cout << "Is Palindrom: (\"" s "\")"<< endl
+       if (s.length() <=1)
+              // base case 
+              return true  
+       else 
+              // recursive case 
+              char first  = s[0]
+              char last = s[s.length()-1]
+              string middle = s.substr(1, s.length()-2)
+
+              if first == last &&  isPlandrome(middle)
+                     return true
+              else 
+                    return false
+
+exercise: Hanoi Disk ======
+if numDiscs == 0 
+       do nothing
+else
+    moveDiscs(numDiscs-1, startPeg, thirdPeg)
+    MoveDiscs(startPeg, endPeg)
+    moveDiscs(numDiscs-1, thirdPeg, enddPeg)
+
+move n-1 from start
+
+Lecture 07 Recursion 3, Fractals ==================================================
+Coding a fractal: size, level parameter
+
+graphics lib =====
+execise: boxy fractal 
+execise: cantor set 
+execise: evaluate
+
+
+Lecture 08 Backtracking1 ==========================================================
+exhaustive search: exploring every possible combi(e.g. chess playing)
+exercise: printAllBinary 
+       00 
+       01
+       10
+       11
+
+       Helper function that accepts more parameters. 
+
+exercise: dice roll sum 
+
+27.03.2023
+Lecture 9 Backtracking2 ==========================================================
+global variable / pruding the search tree
+
+exercise: escapeMaze(maze, row, col)
+choose > explore > unchose 
+
+exercise: Permute Vector 
+
+
+Lecture 10 recursive backtracking3 =================================================
+arm's length recursion > bad style 
+
+backtracking issue, use a mirror helper function 
+
+exercise: sublists (chose each member or not)
+
+exercise: 8 queens 
+
+
+Lecture 11 classes, arrays =========================================================
+object: entity that has state + behavior 
+class declaration.h 
+public vs private (people cant mess up other's code)
+
+implicit parameter 
+
+arrarys: how to build a stack?  > later leap list 
+
+
+28.03.2023
+Lecture 12 - Pointers and Linked List ==============================================
+arrary > continous memory 
+linked data structures > points to nodes 
+
+struct: lightweight class, member are public
+& address of operator 
+pointer: a variable that stores a memory address 
+dereferencing a pointer: 
+int* p = &x
+p      // 0x7f8e20
+*p     //42
+
+null/garbage pointers =====
+nullptr 
+struct ListNode {
+      int data;
+      ListNode* next; 
+}
+
+reassigning pointers =====
+a->next = b->next     a, b points to the same object 
+a=b   you dont point to a ponter, u point to a object. 
+
+a current pointer: dont change the list, make another pointer and change chat 
+how to add a new node to begining of list? 
+
+ 
+Lecture 13 - Linked Lists 2=========================================================
+trasvering a lined list ====
+add to front of list? =====
+void addFront(ListNode*& front, int value) {
+      do sth
+}
+int main(){
+      ListNode* list = ...;
+      addFront(list,10
+}
+
+implement add  =====
+ case2: adding to the end of a linked list: while current->next != nullptr
+ case1: add to empty list: 
+      front = new ListNode(value)
+ 
+ removeFront =======
+
+ memory leak: delete pointer to release memory for object 
+ // rm first value in list,
+ // if list empty, do nothing
+ void removeFront(ListNode*& front) {
+       if (front != nullptr) {
+             ListNode* trash = front;
+             front = front->next;
+             delete trash;
+       }
+}
+ 
+ 
+ 
+Lecture 14 - Linked List Stack Classes, PQs and Heaps ==========================================
+const ========
+const reference parameter cant be modified. 
+void foo(const BankAccount& ba)
+
+function function_name() const  
+e.g. for class ArrayStack, we can't use const for pop() push()
+
+operator overloading ======
+not recommanded, 
+common usecase: make object printable 
+ostream& operator <<(ostream& out, ArrayStack& stack) {
+      out << stack.toString();
+      return out;
+}
+
+Destructor ======
+opposite to constructor 
+ClassName.h 
+~ClassName();  
+
+e.g. 
+ArraryStack::~ArrayStack(){
+      // code you want to run as the stack is being destroyed 
+      delete[] element  // array is the only thing we need delete/clean up memory, as it use "new" to create 
+}
+void ArrayStack::push(int n) {
+      do sth
+}
+
+LinkedIntList class =======
+object:data + behavior 
+LinkedInList.cpp
+// class defination 
+class LinkedIntList{
+public:
+      LinkedIntList();
+      ~LinkedIntList();
+      
+      // member functions 
+      void add(int value);
+      void addFront(int value);
+      int get(int index) const; 
+      ...
+
+}
+
+// client side 
+int main_linkedlist() {
+      LinkedIntList mylist;
+      mylist.add(42);
+}
+
+
+PQs  ========
+prioritization problems
+priority queue: 
+
+pq.enqueue("if", 2)  // add element at given prio
+pq.dequeue()   // rm/returns hightest prio value   
+
+PQ as array/vector: 
+unsorted: add to end, 
+sorted: 
+
+PQ as linked list
+unsorted:
+sorted:
+
+which better? > bigO
+
+Heaps 堆 ======
+arrary in a speical way
+heap bubble-up 
+parent: n/2
+child: n*2, n*2+1 
+
+
+Lecture 15 - Binary Trees ==============================
+efficency ======
+single statement's runtime = 1 
+function call's runtime = (sum of runtimes of statement within)
+growth rate: change in runtime as N changes 
+O(N^3): big-Oh of N cubed
+
+Vector efficiency: 
+      O(1) add, get, add, size, isEmpty 
+      O(N) insert remove toString
+
+Complexity classes =====
+Big-Oh question: what if n grows really rapidly?
+
+Tree ======
+tree is like combi of pointer + recursion 
+binary tree: 2 children 
+e.g. cell phone word auto-compelation 
+ 
+front (linked list) > root( in binary tree) 
+
+struct for tree node object: left data right
+
+exercise: writh a fuction to print tree
+void print(TreeNode* node) {
+      // need go left and right so while is not good solution > use recursion 
+      TreeNode* current - node;
+      while current != nullptr
+            current = current -> left;
+            current = current -> right;
+}
+
+void print(TreeNode* node) {
+      cout << node->data << endl;
+      if node-> != nullptr
+            print(node->left);
+      if node-> != nullptr
+            print(node->right);
+}
+
+better version: 
+void print(TreeNode* node) {
+      if node != nullptr
+            cout << node->data << endl;
+            print(node->left);
+            print(node->right);
+}
+
+how to calculate nr of nodes:
+int size(TreeNode* node) {
+      if node == nullptr
+            return 0
+      else
+            return 1 + szie(node->left) + szie(node->right)
+
+
+Lecture 16 - Binary Search  ===================================================
+binary search trees  BST ====
+traversals: node, children
+pre-order, in-order, post-order
+
+BST: every thing in r's left sub tree will be smaller than r, everything in right sub tree is bigger than r 
+
+exercise: return true if bst contains a value. =====
+
+exercise: find min value in a BST ====
+int getMin(TreeNode* node) {
+      if node->left == nullprt
+            return node -> data 
+      return getMin(node->left)
+}
+
+exercise: add to a BST ====
+note: must pass the current node by reference for changes to be seen 
+
+free tree ====
+post-order traversals 
+
+
+Lecture 17 - Advance Trees ========================================
+remove from a BST ====
+      case1 leaf 
+      case2 only with left child
+      case3 only with right child
+      case4 both children: replace parent with minValue of the right subtree then remove that minValue from subtree 
+can reuse getMin()
+void remove(TeeNode* &node, int value) {
+      if node->data < value
+            remove(node->right, value)
+      else if node->data > value
+            remove(node->left, value)
+      else
+            // case1 leaf
+            if node->isLeaf()
+                  delete node
+                  node = nullptr
+            // case2 only left tree 
+            else if node -> right ==nullptr
+                  TreeNode *trash = node
+                  node = node ->left
+                  delete trash 
+             // case3 only right subtree
+
+            else if node -> left ==nullptr
+                  TreeNode *trash = node
+                  node = node ->right
+                  delete trash                 
+            // case4 full tree 
+            else 
+                  int minValue = getMin(node)
+                  node->data=minValue
+                  remove(node->right, minValue)  // remove the right minValue 
+}
+
+tree maps ====
+BTS-orderd by its keys (key value pair)
+add
+remove
+contain
+get 
+
+red-black tree ====
+
+tries =====
+
+huffman compression ====
+
+bit I/O steams ====
+
+29.03.2023
+Lecture 18 - Graphs ================================================
+basic ====
+graph: data structure with vertices(nodes) and edges(arcs) 
+usage: flights/maps/fb friends/webpage with link/chemical bonds 
+path: vertax a to b 
+path length: neighbor or adjacent: 
+reachability / connectedness: connected, complete 
+loops and cycles 
+
+variation  =====
+weighted graphs: A----250-----B----12----C, e.g airlines
+
+directed graphs: CS course  
+
+acyclic graph 
+
+Linked lists(unweighted ) / trees / graphs
+
+#include "basicgraph.h"
+g.addEdge(v1,v2)
+.clear()
+...
+
+exercise: coolest ====
+string coolest(istrea& input){
+      // read file with names into graph
+      BasicGraph graph;
+      string name1 name2 
+      while(input >> name1 >> name2) {
+            graph.addVertix(name1)
+            graph.addVertix(name2)
+            graph.addEdge(name1, name2)
+        cout << graph << endl; 
+      }
+      // who has most followers of followers
+      for string v : graph.getVertexNames()
+            graph.getNeighbors(v).size
+      
+      ...
+}
+
+path searching =====
+depth-first search DFS:
+breadth-first search BFS: 
+
+
+Lecture 19 - Dijkstra's and A =====================================
+BFS DFS dont consider weight 
+Dijkstra's algorithm: find min weight path 
+
+dijkstra exercise: =====
+run dijkstra's algorithm from vertex E to H
+struct {}
+
+A* =====
+heuristic: 
+admissible heuristic: e.g. google maps 
+
+exercise: maze heuristic 
+
+Lecture 20 - MSTs and Graph Implementations =================================
+span tree ====
+no cycles, usecase: home electric wiring 
+mini span tree: lowest combined weight path 
+
+kruskal's algorithm 
+priority queue > end points not yet connected, add edge to them 
+cluster of vertices. 
+
+3 ways for Graph Implementations ====
+edge list
+adjacency list 
+adjacency matrix
+
+
+30.03.2023
+Lecture 21 - Hashing==========================================================
+implementing a set ====
+      set: fast insert, slow contains and remove 
+      sorted arry set: add contain remove = O(N) O(logN) O(N)
+
+hash: map large domain of values to smaller fixed domain
+hash table: arry that stores elements via hashing
+hash function: an algorithm that maps values to indexes
+hash code: output of hash function for given value 
+
+e.g hashCode(i) -> i 
+
+hashCode(i) -> abs(i)
+add 
+contains
+remove 
+
+collision  > probling 
+collides, then must probe
+
+seperate chaining: linked list node ====
+struct HashNode {
+      int data; 
+      HashNode* next; 
+}
+O(1)
+
+add / contains / remove 
+set.remove(54)
+
+Exercise: HashSet ====
+HashIntSet::HashIntSet() {
+      hashTable = new HashNode*[10]()  // hashTable = new HashNode*[17]()  note:  hash value 17 avoids collision
+}
+
+HashIntSet::add(int value) {
+      hashTable = new HashNode*[10]() 
+      ...
+}
+
+HashIntSet::contains(value) {
+      ...
+}
+
+when hash set gets too big, you can resize > rehashing 
+load factor: smaller better so no rehashing needed
+
+
+Lecture 22 - Advanced Hashing  =======================================================
+void HashIntSet::rehash(){
+      int oldCapacity = capacity;
+      HashNode* oldTable = hasTable
+      capacity = *2 
+}
+
+hash set > hash map =====
+containsKey ? > remove old value > add new 
+
+hashing strings 
+
+hashCode consistency 
+hashCode function must be consistent 
+hashCode distribution: needs well-distributed 
+
+weighted sum ====
+
+Hashing structs/objects
+
+set efficiency ====
+
+hashing: another use / cryptography ====
+requirement for hash function: 
+large possible number > low collision
+one-way > cant find passwd from hash
+
+Cuckoo hashing ====
+
+
+Lecture 23 - Sorting  ================================================================
+Lecture 24 - Inheritance
+Lecture 25 - Polymorphism
+Lecture 26 - Intro to 106J Industrial C++
+Lecture 27 - What's Next (final lecture)
