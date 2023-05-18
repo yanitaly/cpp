@@ -23,30 +23,7 @@ namespace secondNamespace{
     int x = 2;
 }
 
-// Rock Paper Scissor game.
-char getUserChoice();
-char getComputerChoice();
-void showChoice(char choice);
-void chooseWinner(char player, char computer);
-
-char getComputerChoice(){
-    srand(time(NULL));
-    int numPC = rand() % 3 + 1 ;
-    switch(numPC){
-        case 1: return 'r';
-                break;
-        case 2: return 'p';
-                break;        
-        case 3: return 's';
-                break;
-    }
-}
-
-void showChoice(char choice){
-    std::cout << "Computer choosed: "<< choice << "\n";
-}
-
-void chooseWinner(char player, char computer);
+double getTotal(double prices[], int size);
 
 // Main() function: where the execution of program begins
 int main()
@@ -201,15 +178,11 @@ int main()
                 break;
         case 3: std::cout << "You win nothing.\n";
                 break;
-
     } 
 
     std::cin.clear();
     fflush(stdin); // to flush out invalide choices.
 
-    char choicePC; 
-    choicePC = getComputerChoice();
-    showChoice(choicePC); 
     /*
 	32# (02:51:11) Arrays 🚗
 	33# (02:56:40) Sizeof() operator ⚖
@@ -220,12 +193,40 @@ int main()
 	38# (03:20:43) Sort an array ➡
 	39# (03:26:37) Fill() function 🍔
 	40# (03:31:19) Fill an array with user input 🌭
-	41# (03:38:17) Multidimensional arrays ⬜
+   	41# (03:38:17) Multidimensional arrays ⬜
 	42# (03:45:57) QUIZ GAME 💯
 	43# (03:57:42) Memory addresses 🏠
 	44# (04:00:31) Pass by VALUE vs pass by REFERENCE 📧
 	45# (04:04:47) Const parameters 🧱
 	46# (04:07:54) Credit card validator program 💳
+    */
+
+    std::string cars[] = {"bmw","fiat"};
+    // str length = sizeof(arrary of str) / sizeof(str)
+    for (int i=0; i < sizeof(cars)/sizeof(std::string); i++){  
+        std::cout << cars[i] << '\n'; 
+    }
+    double prices[2];
+    prices[0] = 1.1;
+    prices[1] = 2.2;
+
+    // foreach loop: loop that eases the traversal over an iterable data set. 
+    for(double price : prices){
+        std::cout << price << '\n'; 
+    }
+
+    std::string astr = "I am bro";
+    // size in bytes of: var, data type, class, obj, etc.
+    std::cout << "size of a str in byte is: " << sizeof(astr) << '\n'; 
+    double adou = 5.1;
+    std::cout << "size of a double in byte is: " << sizeof(adou) << '\n'; 
+
+    int sizeArray = sizeof(prices)/sizeof(prices[0]);
+    double totalPrice = getTotal(prices, sizeArray);
+    std::cout << "Total price is: " << totalPrice << '\n'; // 
+
+
+    /*
 	47# (04:17:56) Pointers 👈
 	48# (04:23:12) Null pointers ⛔
 	49# (04:27:17) TIC TAC TOE game ⭕
@@ -242,31 +243,13 @@ int main()
 	60# (05:48:59) Inheritance 👩‍👧‍👦
     */
 
-
     return 0;
 }
 
-char getUserChoice(){
-
-}
-
-char getComputerChoice(){
-    srand(time(NULL));
-    int numPC = rand() % 3 + 1 ;
-    switch(numPC){
-        case 1: return 'r';
-                break;
-        case 2: return 'p';
-                break;        
-        case 3: return 's';
-                break;
+double getTotal(double prices[], int size){
+    double total = 0;
+    for (int i = 0; i < size; i++){
+        total = total + prices[i];
     }
-}
-
-void showChoice(char choice){
-    std::cout << "Computer choosed: "<< choice << "\n";
-}
-
-void chooseWinner(char player, char computer){
-
+    return total; 
 }
