@@ -9,7 +9,6 @@ int main(){
 
     for(int element : myArray){
         std::cout << element << ' ';
-        ;
     }
 
     return 0;

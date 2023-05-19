@@ -195,10 +195,6 @@ int main()
 	40# (03:31:19) Fill an array with user input 🌭
    	41# (03:38:17) Multidimensional arrays ⬜
 	42# (03:45:57) QUIZ GAME 💯
-	43# (03:57:42) Memory addresses 🏠
-	44# (04:00:31) Pass by VALUE vs pass by REFERENCE 📧
-	45# (04:04:47) Const parameters 🧱
-	46# (04:07:54) Credit card validator program 💳
     */
 
     std::string cars[] = {"bmw","fiat"};
@@ -216,17 +212,43 @@ int main()
     }
 
     std::string astr = "I am bro";
-    // size in bytes of: var, data type, class, obj, etc.
+    // sizeof:  in bytes of: var, data type, class, obj, etc.
     std::cout << "size of a str in byte is: " << sizeof(astr) << '\n'; 
     double adou = 5.1;
     std::cout << "size of a double in byte is: " << sizeof(adou) << '\n'; 
 
+    // pass array to function
     int sizeArray = sizeof(prices)/sizeof(prices[0]);
     double totalPrice = getTotal(prices, sizeArray);
     std::cout << "Total price is: " << totalPrice << '\n'; // 
 
+    // fill(begin, end, value): fills a range of elements with a specified value 
+    int sizeFill = 6;
+    std::string arrayFill[sizeFill];
+    fill(arrayFill, arrayFill + sizeFill/3, "pizza");  // begin addr, end addr, ...
+    fill(arrayFill + sizeFill/3, arrayFill + sizeFill/3*2, "pasta");
+    fill(arrayFill + sizeFill/3*2, arrayFill + sizeFill, "salad");
+    for (std::string food : arrayFill) {
+        std::cout << food << " \n";
+    }
+
+    // multi-dimentional arrays. 
+    std::string cars2D[][2] = {{"a11", "a12"},
+                                {"a21", "a22"},
+                                {"a31", "a32"}};
+    int rowNr = sizeof(cars2D)/sizeof(cars2D[0]);   // nr of rows
+    int colNr = sizeof(cars2D[0])/sizeof(cars2D[0][0]);
+    for (int i = 0; i < rowNr; i++){
+        for (int j = 0; j < colNr; j++){
+            std::cout << cars2D[i][j] << "\n";
+        }    
+    }
 
     /*
+    43# (03:57:42) Memory addresses 🏠
+	44# (04:00:31) Pass by VALUE vs pass by REFERENCE 📧
+	45# (04:04:47) Const parameters 🧱
+	46# (04:07:54) Credit card validator program 💳
 	47# (04:17:56) Pointers 👈
 	48# (04:23:12) Null pointers ⛔
 	49# (04:27:17) TIC TAC TOE game ⭕
@@ -242,6 +264,39 @@ int main()
 	59# (05:42:51) Getters & setters 🔒
 	60# (05:48:59) Inheritance 👩‍👧‍👦
     */
+
+    // memory address = locaton in memory where data is stored, "&"
+    std::string myStr = "Hi";
+    int myInt = 50;
+    bool myBool = true;
+    std::cout << &myStr << '\n';  // 0xc06e5ff380 > hex to dec > 826485502848 (8-4=4 byte, size of int)
+    std::cout << &myInt << '\n';  // 0xc06e5ff37c > hex to dec > 826485502844  (4-3=1 byte, size of bool)
+    std::cout << &myBool << '\n'; // 0xc06e5ff37b > hex to dec > 826485502843   
+ 
+    // const parameters = parameters effectively read-only, more secure and conveys intent, 
+    // useful for references and pointers. 
+
+    // pointer = variable that stores addr of another var (sometimes easier to work with addr)
+    // & addr-off operator
+    // * dereference operator  
+    std::string name47 = "Bro";
+    std::string *pName47 = &name47; // addr 
+    std::cout << name47 << "  "<< &name47 << "  "<< pName47 << "  "<< *pName47 <<  '\n'; 
+    std::string pizzas[] = {"pizza1", "pizza2", "pizza3", "pizza4", "pizza5"};
+    std::string *pStr = pizzas;  // addr 
+    std::cout << *pizzas << "   "<< pizzas << '\n';
+
+    // null pointer == 
+    int *pointer = nullptr; 
+    int x48 = 123;
+    pointer = &x48; 
+    if (pointer != nullptr){
+        std::cout <<"addr was assigned: " << *pointer <<'\n';
+    } 
+    else{
+        std::cout <<"addr was not assigned"  <<'\n'; // note: dangerous to deref a nullptr or non-assigned
+
+    }
 
     return 0;
 }
