@@ -4,13 +4,13 @@
 #include <cmath>
 #include <ctime>
 
+
 // C++ program to display "Hello World"
 // compile with: g++ -o helloworld.o helloworld.cpp 
 // run with: helloworld.o
 
 //  iosteram: Header file for input output functions
 
-// 
 //using namespace std;
 
 typedef std::string text_t; // equivalent with keyword "using"
@@ -24,6 +24,8 @@ namespace secondNamespace{
 }
 
 double getTotal(double prices[], int size);
+int factorial(int x);
+
 
 // Main() function: where the execution of program begins
 int main()
@@ -195,6 +197,7 @@ int main()
 	40# (03:31:19) Fill an array with user input 🌭
    	41# (03:38:17) Multidimensional arrays ⬜
 	42# (03:45:57) QUIZ GAME 💯
+    
     */
 
     std::string cars[] = {"bmw","fiat"};
@@ -253,16 +256,7 @@ int main()
 	48# (04:23:12) Null pointers ⛔
 	49# (04:27:17) TIC TAC TOE game ⭕
 	50# (04:46:26) Dynamic memory 🧠
-	51# (04:52:15) Recursion 😵
-	52# (04:58:35) Function templates 🍪
-	53# (05:03:49) Structs 🏗
-	54# (05:08:49) Pass structs as arguments 🚚
-	55# (05:14:17) Enums 📅
-	56# (05:18:38) Object Oriented Programming 🧍
-	57# (05:29:32) Constructors 👷
-	58# (05:38:26) Constructor overloading 👨‍🍳
-	59# (05:42:51) Getters & setters 🔒
-	60# (05:48:59) Inheritance 👩‍👧‍👦
+    51# (04:52:15) Recursion 😵
     */
 
     // memory address = locaton in memory where data is stored, "&"
@@ -298,16 +292,39 @@ int main()
 
     }
 
-    int count = 0;
-    int foo[5] = {1, 2, 1, 1, 3}; 
-    for (int bla=0; bla<5; bla++){
-        std::cout << "bla: " << bla; 
-        std::cout << "count: " << count; 
-        if(foo[bla] == 1){
-            count=count+1;
-        }
+    // dynamic memory = mem located after prog already compiled & running
+    // 'new' operator to alloc mem in HEAP iso stack. 
+    // flexible & useful when dont know how much mem will need, esp accepting user input. 
+    int *pNum = NULL; 
+    pNum = new int; 
+    *pNum = 21; 
+    std::cout << "address: " << pNum << '\n';
+    std::cout << "value: " << *pNum << '\n';
+    delete pNum; 
+
+    /*
+    char *pGrades = NULL; 
+    int size; 
+    std::cout << "How many grades to enter in? ";
+    std::cin >> size;
+    pGrades = new char[size]; 
+    for(int i50 = 0; i50 < size; i50++){
+        std::cout << "Enter grade #" << i50 + 1 << '\n';
+        std::cin >> pGrades[i50];
     }
-    std::cout << "end count: " << count; 
+    for(int i50 = 0; i50 < size; i50++){
+        std::cout << pGrades[i50] << " ";
+    }
+    delete[] pGrades; 
+    */
+
+    //recursion: interative vs recursion 
+    // :) less code, cleaner, useful for sorting/searching
+    // :( use more mem, slower
+    int x51 = 4;
+    std::cout << "factorial of "<< x51 << " is: " << factorial(x51); 
+
+
 
     return 0;
 }
@@ -318,4 +335,12 @@ double getTotal(double prices[], int size){
         total = total + prices[i];
     }
     return total; 
+}
+
+int factorial(int x){
+    if (x == 1){
+        return 1; 
+    }
+    else 
+        return x * factorial(x - 1);
 }
