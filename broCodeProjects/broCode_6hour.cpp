@@ -298,6 +298,17 @@ int main()
 
     }
 
+    int count = 0;
+    int foo[5] = {1, 2, 1, 1, 3}; 
+    for (int bla=0; bla<5; bla++){
+        std::cout << "bla: " << bla; 
+        std::cout << "count: " << count; 
+        if(foo[bla] == 1){
+            count=count+1;
+        }
+    }
+    std::cout << "end count: " << count; 
+
     return 0;
 }
 
