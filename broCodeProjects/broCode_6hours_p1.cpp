@@ -274,11 +274,22 @@ int main()
     // & addr-off operator
     // * dereference operator  
     std::string name47 = "Bro";
-    std::string *pName47 = &name47; // addr 
+
+    std::string *pName47;  // define pointer  
+    pName47 = &name47; // addr, equivalent to:     std::string *pName47 = &name47
+    
     std::cout << name47 << "  "<< &name47 << "  "<< pName47 << "  "<< *pName47 <<  '\n'; 
     std::string pizzas[] = {"pizza1", "pizza2", "pizza3", "pizza4", "pizza5"};
     std::string *pStr = pizzas;  // addr 
     std::cout << *pizzas << "   "<< pizzas << '\n';
+
+    int var = 1, *varPoint;
+    varPoint = &var;  // addr
+    *varPoint = var; // value
+    std::cout << *varPoint << '\n';   
+    std::cout << var << '\n';
+    std::cout << varPoint << '\n';
+    std::cout << &var << '\n';
 
     // null pointer == 
     int *pointer = nullptr; 
