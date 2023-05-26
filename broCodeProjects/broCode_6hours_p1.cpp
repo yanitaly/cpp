@@ -13,7 +13,7 @@
 
 //using namespace std;
 
-typedef std::string text_t; // equivalent with keyword "using"
+typedef std::string text_t; // 5. alias, equivalent with keyword "using"
 using text_t = std::string;
 
 namespace firstNamespace{
@@ -40,7 +40,7 @@ int main()
     7#   (00:43:18) Type conversion ✨
     8#   (00:47:05) User input ⌨
     9#   (00:52:35) Useful math related functions🔢
-    10# (00:56:03) Hypotenuse calculator practice program 📐
+    10#  (00:56:03) Hypotenuse calculator practice program 📐
     */
 
     // prints hello world
@@ -53,11 +53,12 @@ int main()
     bool forSale = true;    // boolean 
     std::string name = "Bro Code"; // string: objects representing a seq of text
     
-    const double PI = 3.14159;
+    // 47. const parameters = parameters effectively read-only, more secure and conveys intent, 
+    // useful for references and pointers. 
+    const double PI = 3.14159; 
     std::cout << age << gpa << grade << forSale << " Hello " << name << PI <<'\n';
 
-    // namespace: prevents name conflicts in large projs
-  
+    // 4. namespace: prevents name conflicts in large projs
     using namespace secondNamespace;
     std::cout << x << firstNamespace::x << secondNamespace::x <<"\n";
 
@@ -197,11 +198,10 @@ int main()
 	40# (03:31:19) Fill an array with user input 🌭
    	41# (03:38:17) Multidimensional arrays ⬜
 	42# (03:45:57) QUIZ GAME 💯
-    
     */
 
     std::string cars[] = {"bmw","fiat"};
-    // str length = sizeof(arrary of str) / sizeof(str)
+    // sizeof(arrary of str) / sizeof(str)  =  str length
     for (int i=0; i < sizeof(cars)/sizeof(std::string); i++){  
         std::cout << cars[i] << '\n'; 
     }
@@ -267,9 +267,6 @@ int main()
     std::cout << &myInt << '\n';  // 0xc06e5ff37c > hex to dec > 826485502844  (4-3=1 byte, size of bool)
     std::cout << &myBool << '\n'; // 0xc06e5ff37b > hex to dec > 826485502843   
  
-    // const parameters = parameters effectively read-only, more secure and conveys intent, 
-    // useful for references and pointers. 
-
     // pointer = variable that stores addr of another var (sometimes easier to work with addr)
     // & addr-off operator
     // * dereference operator  
@@ -277,11 +274,11 @@ int main()
 
     std::string *pName47;  // define pointer  
     pName47 = &name47; // addr, equivalent to:     std::string *pName47 = &name47
-    
+
     std::cout << name47 << "  "<< &name47 << "  "<< pName47 << "  "<< *pName47 <<  '\n'; 
     std::string pizzas[] = {"pizza1", "pizza2", "pizza3", "pizza4", "pizza5"};
     std::string *pStr = pizzas;  // addr 
-    std::cout << *pizzas << "   "<< pizzas << '\n';
+    std::cout << *pizzas << "   "<< pizzas << '\n'; // pointer and value to first ele of arrary
 
     int var = 1, *varPoint;
     varPoint = &var;  // addr
@@ -291,7 +288,7 @@ int main()
     std::cout << varPoint << '\n';
     std::cout << &var << '\n';
 
-    // null pointer == 
+    // null pointer 
     int *pointer = nullptr; 
     int x48 = 123;
     pointer = &x48; 
@@ -299,8 +296,8 @@ int main()
         std::cout <<"addr was assigned: " << *pointer <<'\n';
     } 
     else{
-        std::cout <<"addr was not assigned"  <<'\n'; // note: dangerous to deref a nullptr or non-assigned
-
+        // note: dangerous to deref a nullptr or non-assigned
+        std::cout <<"addr was not assigned"  <<'\n'; 
     }
 
     // dynamic memory = mem located after prog already compiled & running
@@ -334,8 +331,6 @@ int main()
     // :( use more mem, slower
     int x51 = 4;
     std::cout << "factorial of "<< x51 << " is: " << factorial(x51); 
-
-
 
     return 0;
 }
