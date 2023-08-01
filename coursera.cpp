@@ -7,7 +7,18 @@ int main(){
 
 }
 
-=============
+========================
+vector<string> oceans(0);
+oceans.push_back("Pacific"); // add to end
+oceans.push_back("Atlantic");
+oceans.push_back("Indian");
+oceans.push_back("Arctic");
+oceans.push_back("Southern");
+oceans.push_back("Place Holder");
+oceans.at(5) = "Delete"; // replace element nr5
+oceans.pop_back(); // remove last element
+
+=======================
 // Function to reverse a vector 
 #include <iostream>
 #include <vector>
@@ -36,9 +47,8 @@ int main(int argc, char** argv) {
   return 0;
 }
 
-
 =========================
-// function to calculate average
+// function to calculate average of inputs
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -66,3 +76,5 @@ int main(int argc, char** argv) {
   cout << avg << endl;
   return 0;
 }
+
+========================
