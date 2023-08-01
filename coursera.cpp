@@ -8,12 +8,12 @@ int main(){
 }
 
 =============
+// Function to reverse a vector 
 #include <iostream>
 #include <vector>
 using namespace std;
 
 int main(int argc, char** argv) {
-  
   vector<string> reverse(0);
   reverse.push_back(argv[1]);
   reverse.push_back(argv[2]);
@@ -32,7 +32,37 @@ int main(int argc, char** argv) {
   for (auto a : reverse) {
     cout << a << endl;
   }
-  
+
   return 0;
+}
+
+
+=========================
+// function to calculate average
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main(int argc, char** argv) {
   
+  double input;
+  double avg = 0;
+  vector<double> numList(0);
+  
+  cout << "Enter double or int to add to total, else find total average:" << endl;
+  while (cin >> input) {
+    // add input into vector
+    numList.push_back(input);
+    double total = 0;
+    for (auto i : numList){
+      total+=i;
+      avg = total / numList.size();
+    }
+    cout << "Total is: " << total << endl;  
+    cout << "Enter double or int to add to total, else find total average:" << endl;
+  }
+  // iterate through vector, add elements to total, then calculate average
+  // your code goes above
+  cout << avg << endl;
+  return 0;
 }
