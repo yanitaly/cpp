@@ -94,29 +94,28 @@ int main(int argc, char** argv) {
 //////////////////////////////////  
   
   //add code below this line
-// Write a program that reads a text file and returns the number of lines as well as the total number of characters in the file.
-try{
-  ifstream file;
-  char ch;
-  int charcount;
-  int linecount;
-  string read;
-  file.open(path);
-  if (!file)
-    throw runtime_error("File failed to open.");
-  while(getline(file, read)){
-    linecount++;
-    chars += read.length();
+  // Write a program that reads a text file and returns the number of lines as well as the total number of characters in the file.
+  try{
+    ifstream file;
+    int charcount =0;
+    int linecount =0;
+    string read;
+    file.open(path);
+    if (!file)
+      throw runtime_error("File failed to open.");
+    while(getline(file, read)){
+      linecount++;
+      charcount += read.length();
+    }
+    file.close();
+  
+    cout << linecount << " line(s)" << endl;
+    cout << charcount << " character(s)" << endl;
   }
-  file.close();
-
-  cout << linecount << " line(s)" << endl;
-  cout << charcount << " character(s)" << endl;
-}
-
-catch(exception& e){
-  cerr << e.what() << endl;
-}
+  
+  catch(exception& e){
+    cerr << e.what() << endl;
+  }
   
   //add code above this line
   return 0;
@@ -124,8 +123,13 @@ catch(exception& e){
 
 ========================
 /*
-Write a program that reads a comma delimited CSV file with four columns and returns the average of each column in the file. 
-Assume that the CSV files used will only contain 3 rows and 4 columns.
+Problem:
+Write a program that reads a comma delimited CSV file with four columns and returns the average of each column in the file. Assume that the CSV files used will only contain 3 rows and 4 columns.
+Expected Output:
+The CSV file looks like the one below.
+1,5,10,30
+19,15,10,15
+10,4,-2,15
 */
 
 #include <iostream>
@@ -228,7 +232,7 @@ int main(int argc, char** argv) {
     cerr << e.what() << endl;
   }
 
-for(int i=data.size()-1, i>=0; i--){
+for(int i=data.size()-1; i>=0; i--){
     cout << data.at(i) << endl;
 }
 
@@ -238,4 +242,132 @@ for(int i=data.size()-1, i>=0; i--){
   
 }
 
+====================
+/*
+Write a program that reads a tab ('\t') delimited CSV file and prints the name of the oldest person in the file. 
+Assume that there are no two people with the same age.
+*/
   
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <sstream>
+#include <iomanip>
+using namespace std;
+
+int main(int argc, char** argv) {
+
+////////// DO NOT EDIT! //////////
+  string path = argv[1];        //
+//////////////////////////////////  
+  
+  //add code below this line
+
+  vector<string> data;
+  try{
+      ifstream file;
+      string read;
+      file.open(path);
+      if(!file){
+        throw runtime_error("File failed to open."); 
+      }
+    
+      while(getline(file, read)){
+        stringstream ss(read);
+        while(getline(ss, read, '\t')){
+          data.push_back(read);
+        }
+      }
+      file.close();
+  }
+
+  catch(exception& e){
+    cerr << e.what() << endl;
+  }
+  
+  int maxAge = 0;
+  string oldestName; 
+  for (int i = 1; i<=data.size(); i+=3){
+    if (stoi(data.at(i)) > maxAge ){
+      maxAge = stoi(data.at(i));
+      oldestName = data.at(i-1);
+    }
+  }
+
+  cout << "The oldest person is " << oldestName << ".";
+
+  //add code above this line
+  
+  return 0;
+  
+}
+
+===================
+/*
+Problem
+Write a program that reads a comma delimited CSV file and prints all of the cities which reside in the Southern Hemisphere. Note, any latitude with a negative value is south of the equator.
+
+Expected Output
+The CSV file looks like the one below.
+City,Country,Latitude,Longitude
+Beijing,China,39,116
+Perth,Australia,-57,115
+Port Moresby,Papua New Guinea,-25,147
+Tokyo,Japan,35,139
+*/
+  
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <sstream>
+#include <iomanip>
+using namespace std;
+
+int main(int argc, char** argv) {
+
+////////// DO NOT EDIT! //////////
+  string path = argv[1];        //
+//////////////////////////////////  
+  
+  //add code below this line
+
+  vector<string> data;
+  try{
+      ifstream file;
+      string read;
+      file.open(path);
+      if(!file){
+        throw runtime_error("File failed to open."); 
+      }
+    
+      while(getline(file, read)){
+        stringstream ss(read);
+        while(getline(ss, read, ',')){
+          data.push_back(read);
+        }
+      }
+      file.close();
+  }
+
+  catch(exception& e){
+    cerr << e.what() << endl;
+  }
+  
+  string cities;
+  for (int i = 6; i<=data.size(); i+=4){
+      if (stoi(data.at(i)) < 0 )
+        cities += data.at(i-2) + ", "; 
+  }
+
+  cout << "The following cities are in the Southern Hemisphere: ";
+  cities.pop_back(); // rm last space
+  cities.pop_back(); // rm ","
+  cities +=".";
+  cout << cities;
+  //add code above this line
+  
+  return 0;
+  
+}
+
+
