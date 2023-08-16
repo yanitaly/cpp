@@ -78,3 +78,164 @@ int main(int argc, char** argv) {
 }
 
 ========================
+=  File Basics         =
+========================
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <sstream>
+#include <iomanip>
+using namespace std;
+
+int main(int argc, char** argv) {
+
+////////// DO NOT EDIT! //////////
+  string path = argv[1];        //
+//////////////////////////////////  
+  
+  //add code below this line
+// Write a program that reads a text file and returns the number of lines as well as the total number of characters in the file.
+try{
+  ifstream file;
+  char ch;
+  int charcount;
+  int linecount;
+  string read;
+  file.open(path);
+  if (!file)
+    throw runtime_error("File failed to open.");
+  while(getline(file, read)){
+    linecount++;
+    chars += read.length();
+  }
+  file.close();
+
+  cout << linecount << " line(s)" << endl;
+  cout << charcount << " character(s)" << endl;
+}
+
+catch(exception& e){
+  cerr << e.what() << endl;
+}
+  
+  //add code above this line
+  return 0;
+}
+
+========================
+/*
+Write a program that reads a comma delimited CSV file with four columns and returns the average of each column in the file. 
+Assume that the CSV files used will only contain 3 rows and 4 columns.
+*/
+
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <sstream>
+#include <iomanip>
+using namespace std;
+
+int main(int argc, char** argv) {
+
+////////// DO NOT EDIT! //////////
+  string path = argv[1];        //
+//////////////////////////////////  
+  
+  //add code below this line
+
+  vector<string> data;
+  int col1Avg = 0;
+  int col2Avg = 0;
+  int col3Avg = 0; 
+  int col4Avg = 0; 
+
+
+  try{
+    ifstream file;
+    string read;
+    file.open(path);
+    if(!file){
+      throw runtime_error("File failed to open."); 
+    }
+  
+    while(getline(file, read)){
+      stringstream ss(read);
+      while(getline(ss, read, ',')){
+        data.push_back(read);
+      }
+    }
+    file.close();
+  
+  }
+  catch(exception& e){
+    cerr << e.what() << endl;
+  }
+
+  for(int i=0; i < data.size(); i++){
+    if(i%4 == 0){
+      col1Avg += stoi(data.at(i));
+      col2Avg += stoi(data.at(i+1));
+      col3Avg += stoi(data.at(i+2));
+      col4Avg += stoi(data.at(i+3));
+    }
+  }
+
+  cout << col1Avg/3 << " " <<  col2Avg /3<< " " << col3Avg/3 << " " << col4Avg/3 <<  endl;
+
+  //add code above this line
+  
+  return 0;
+  
+}
+
+================
+/*
+Write a program that reads a text file and prints the contents in reverse order.
+*/
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <sstream>
+#include <iomanip>
+using namespace std;
+
+int main(int argc, char** argv) {
+
+////////// DO NOT EDIT! //////////
+  string path = argv[1];        //
+//////////////////////////////////  
+  
+  //add code below this line
+  vector<string> data;
+  try{
+    ifstream file;
+    string read;
+    file.open(path);
+    if(!file){
+      throw runtime_error("File failed to open."); 
+    }
+  
+    while(getline(file, read)){
+      stringstream ss(read);
+      while(getline(ss, read)){
+        data.push_back(read);
+      }
+    }
+    file.close();
+  }
+
+  catch(exception& e){
+    cerr << e.what() << endl;
+  }
+
+for(int i=data.size()-1, i>=0; i--){
+    cout << data.at(i) << endl;
+}
+
+  //add code above this line
+  
+  return 0;
+  
+}
+
+  
