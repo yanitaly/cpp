@@ -367,6 +367,73 @@ int main(int argc, char** argv) {
   //add code above this line
   
   return 0;
+
+
+========================
+=  Recursive           =
+========================
+  int RecursiveSum(int n){
+  if (n==1){
+    return 1;
+  }
+  else {
+    return n + RecursiveSum(n-1);
+  }
+}
+
+//add function definitions above this line
+
+int main(int argc, char** argv) {
+  cout << RecursiveSum(stoi(argv[1])) << endl;
+  return 0;
+}
+
+
+
+int ListSum(vector<int>& nums) {
+  if (nums.size() == 1) {
+    return nums.at(0);
+  }
+  else {
+    vector<int> new_vector(nums.begin() + 1, nums.begin() + nums.size());
+    return nums.at(0) + ListSum(new_vector);
+  }
+}
+
+
+
+int BunnyEars(int n){
+  if(n == 0)
+    return 0;
+  else{
+    return BunnyEars(n-1) + 2; 
+  }
+
+
+
+
+string ReverseString(string s) {
+  if (s.length() == 1) {
+    return s;
+  }
+  else {
+    return s.substr(s.length() - 1) + ReverseString(s.substr(0, s.length() - 1));
+  }
+}
+
+
+
+int GetMax(vector<int>& nums) {
+  if (nums.size() == 1) {
+    return nums.at(0);
+  }
+  else {
+    vector<int> new_vector(nums.begin() + 1, nums.begin() + nums.size());
+    return max(nums.at(0), GetMax(new_vector));
+  }
+}
+
+  
   
 }
 
