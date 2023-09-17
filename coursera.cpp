@@ -433,6 +433,81 @@ int GetMax(vector<int>& nums) {
   }
 }
 
+========================
+=  Function            =
+========================
+/*
+If the string parameter is "true", print only the even integers separated by a newline. If the string parameter is "false", print only the odd integers separated by a newline. Else, no output will be printed and you will see the default message of Command was successfully executed..
+*/
+#include <iostream>
+#include <vector>
+using namespace std;
+
+//add code below this line
+
+void GetOddsEvens(string x, vector<int> y){
+  if(x == "true"){
+    for (auto a : y){
+      if (a % 2 == 0){
+        cout << a << endl;
+      }
+    }
+  } 
+  else if (x == "false"){
+    for (auto a : y){
+      if (a % 2 == 1){
+        cout << a << endl;
+      }
+    } 
+  }
+}
+
+//add code above this line
+
+int main(int argc, char** argv) {
+  string x = argv[1];
+  vector<int> y;
+  for (int i = 2; i < argc; i++) {
+    y.push_back(stoi(argv[i]));
+  }
+  GetOddsEvens(x, y);
+}
+
+
+// Write a function called FindTerm() that takes a string term and a string vector as parameters. 
+bool FindTerm(string x, vector<string>& y) {
+  bool b = false;
+  for (auto a : y) {
+    if (a == x) {
+      b = true;
+    }
+  }
+  return b;
+}
+
+
+// check word is Palindrome 
+bool IsPalindrome(string x) {
+  bool palindrome = false;
+  string y;
+  for (int i = x.length() - 1; i >= 0; i--) {
+    y += x.at(i);
+  }
+  if (x == y) {
+    palindrome = true;
+  }
+  return palindrome;
+} 
+
+
+// check word is Palindrome using helper function 
+bool IsPalindrome(string x) {
+  bool palindrome = false;
+  if (x == (Reverse(x))) {
+    palindrome = true;
+  }
+  return palindrome;
+}
   
   
 }
